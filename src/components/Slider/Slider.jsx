@@ -1,38 +1,66 @@
 
-import {Swiper, SwiperSlide} from "swiper/react";
-import "swiper/css";
-// import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper";
 import style from "./Slider.module.css"
 import Arrow from "../../assets/img/Arrow";
+import { Children, cloneElement, useEffect, useState } from "react";
 
-export default function Slider() {
+export default function Slider({children}) {
+    const [pages, setPages] = useState([])
+    const [offset, setOffset] = useState(0)
+
+    const handleLeftArrowClick = () => {
+        setOffset((currentOffset) => {
+            const newOffset = currentOffset + 100
+
+            return Math.min(newOffset, 0)
+        })
+    }
+
+    const handleRigthArrowClick = () => {
+        setOffset((currentOffset) => {
+            const newOffset = currentOffset - 100
+
+            const maxOffset = -(100 * (pages.length - 1))
+
+            return Math.max(newOffset, maxOffset)
+        })
+    }
+
+    useEffect(() => {
+        setPages(
+            Children.map(children, child => {
+                return cloneElement(child, {
+                    style: {
+                        height: '100%',
+                        minWidth: '100%',
+                        maxWidth: '100%',
+                    }
+                })
+            })
+        )
+    }, [])
+
     return (
-        <>
-            <Swiper
-                cssMode={true}
-                navigation={true}
-                pagination={true}
-                mousewheel={true}
-                keyboard={true}
-                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                className={style.mySwiper}
-            >
-                <SwiperSlide className={style.slide}>
-                    <img src="https://incrussia.ru/wp-content/uploads/2023/02/0.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://brcforum.sitkocdn.ru/monthly_2022_08/Hogwarts_Legacy_Image_1.jpg.25dbea97040dabef77e2ea4bfcb97ca9.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://cdn.igromania.ru/mnt/games/4/9/4/a/d/0/14727/73f7677257f9bfa6_1920xH.jpg" alt="" />
-                </SwiperSlide>
-                <div className="swiper-button-prev">
+        <div className={style.main_container}>
+            <div className={style.arrows}>
+                <div className={style.arrow_1} onClick={handleLeftArrowClick}>
                     <Arrow />
                 </div>
-            </Swiper>
-        </>
+                <div className={style.arrow_2} onClick={handleRigthArrowClick}>
+                    <Arrow />
+                </div>
+            </div>
+           <div className={style.window}>
+            <div className={style.all_pages_container} 
+            style={
+                {
+                    transform: `translateX(${offset}}%)`
+                }
+            }
+            >
+                {pages}
+            </div>
+           </div>
+        </div>
     )
 }
 

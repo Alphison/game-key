@@ -15,6 +15,7 @@ function App() {
                 <Route path="/user" element={<User />}/>
             </Routes>
           </div>
+          <Header />
         </div>
       </BrowserRouter>
   );

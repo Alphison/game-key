@@ -1,0 +1,31 @@
+.subscription{
+    max-width: 431px;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+}
+.h1_sub{
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: Montserrat;
+}
+input{
+    font-weight: 500;
+    font-size: 20px;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #B7B7B7;
+    padding-bottom: 10px;
+}
+.btn_sub{
+    border: none;
+    padding: 20px 0;
+    width: 100%;
+    background: #FF2D2D;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+}
