@@ -4,7 +4,7 @@ import Ikon2 from "../../assets/img/user.png"
 import logo from "../../assets/img/logo.png"
 import style from "./Header.module.css"
 
-const Header = () => {
+const Header = ({setActive}) => {
     return (
         <header>
             <NavLink to={"/"}>
@@ -18,11 +18,11 @@ const Header = () => {
                 <NavLink className={style.navlink} to={"#"}>скидки</NavLink>
             </nav>
             <div className={style.btns_header}>
-                <div className="ikon">
+                <div className={style.ikon} onClick={() => setActive(true)}>
                     <img src={Ikon} alt="" />
                 </div>
                 <NavLink to={"/user"}>
-                    <div className="ikon">
+                    <div className={style.ikon}>
                         <img src={Ikon2} alt="" />
                     </div>
                 </NavLink>

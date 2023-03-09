@@ -1,6 +1,5 @@
 import style from "./catalog.module.css"
 import search from "../../assets/img/search.png"
-import tovar from "../../assets/img/tovar.png"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 
