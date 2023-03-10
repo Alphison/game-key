@@ -43,17 +43,17 @@ export default function Slider({children}) {
         <div className={style.main_container}>
             <div className={style.arrows}>
                 <div className={style.arrow_1} onClick={handleLeftArrowClick}>
-                    <Arrow />
+                    <Arrow  className={style.arrow_1}/>
                 </div>
                 <div className={style.arrow_2} onClick={handleRigthArrowClick}>
-                    <Arrow />
+                    <Arrow className="svg"/>
                 </div>
             </div>
            <div className={style.window}>
             <div className={style.all_pages_container} 
             style={
                 {
-                    transform: `translateX(${offset}}%)`
+                    transform: `translateX(${offset}%)`
                 }
             }
             >

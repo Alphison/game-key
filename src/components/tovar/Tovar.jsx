@@ -9,7 +9,7 @@ const Tovar = () => {
     const id = params.id
     
 
-    const tovar = tovars.filter((item) => item.id === id)
+    const tovar = tovars.filter((item) => item.id == id)
 
     return (
         <div className={style.tovar}>

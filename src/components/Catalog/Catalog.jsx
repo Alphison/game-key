@@ -40,6 +40,15 @@ export const tovars = [
 
 const Catalog = () => {
     const [data, setData] = useState(tovars)
+    const [searchData, setSearch] = useState('')
+
+    const unDataSale = data.filter((item) => item.sale === 0) 
+
+    const searchDataMassive = unDataSale.filter((item) => item.name.toLowerCase().includes(searchData))  
+
+    const handleChangeSearch = (e) => {
+        setSearch(e.target.value)
+    }
 
     return (
         <div className={style.catalog}>
@@ -48,17 +57,17 @@ const Catalog = () => {
                     Каталог
                 </h1>
                 <div className={style.input}>
-                    <input type="text" placeholder="Поиcк..."/>
+                    <input type="text" placeholder="Поиcк..." onChange={(e) => handleChangeSearch(e)} value={searchData}/>
                     <div className={style.ikon_search}>
-                        <img src={search} alt="" />
+                        <img src={search} alt=""/>
                     </div>
                 </div>
             </div>
             <div className={style.catalog_wrapper}>
                 {
-                    data.map(item => {
+                    searchDataMassive.map(item => {
                         return (
-                            <div className={style.tovar}>
+                            <div className={style.tovar} key={item.id}>
                                 <Link to={`/tovar/${item.id}`}>
                                     <div className={style.img_tovar}>
                                         <img src={item.img} alt="" />

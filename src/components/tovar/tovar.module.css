@@ -53,6 +53,7 @@ letter-spacing: 0.1em;
 color: #FFFFFF;
 }
 .content_tovar button{
+    cursor: pointer;
     margin-top: 74px;
     border: none;
     background: #FF2D2D;

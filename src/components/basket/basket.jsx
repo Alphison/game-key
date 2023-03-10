@@ -2,6 +2,7 @@ import style from "./basket.module.css"
 import tovar from "../../assets/img/tovar.png"
 
 const Basket = ({activeModal, setActive}) => {
+
     return (
         <div className={activeModal ? style.basket + ' ' + style.active : style.basket} onClick={() => setActive(false)}>
             <div className={activeModal ? style.basket_inner + ' ' + style.active : style.basket_inner} onClick={(e) => e.stopPropagation()}>

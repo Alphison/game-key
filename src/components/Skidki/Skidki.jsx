@@ -1,7 +1,14 @@
 import style from "../Catalog/catalog.module.css"
 import tovar from "../../assets/img/tovar.png"
+import { tovars } from "../Catalog/Catalog"
+import { useState } from "react"
 
 const Skidki = () => {
+    const [data, setData] = useState(tovars)
+
+    const dataSale = data.filter((item) => item.sale > 0)  
+
+
     return (
         <div className={style.catalog}>
             <div className={style.header_catalog}>
@@ -10,52 +17,21 @@ const Skidki = () => {
                 </h1>
             </div>
             <div className={style.catalog_wrapper}>
-                <div className={style.tovar}>
-                    <div className={style.img_tovar}>
-                        <img src={tovar} alt="" />
-                    </div>
-                    <div className={style.prices}>
-                        <p className={style.price_old}>от 599 ₽</p>
-                        <p className={style.price}>от 599 ₽</p>
-                    </div>
-                </div>
-                <div className={style.tovar}>
-                    <div className={style.img_tovar}>
-                        <img src={tovar} alt="" />
-                    </div>
-                    <div className={style.prices}>
-                        <p className={style.price_old}>от 599 ₽</p>
-                        <p className={style.price}>от 599 ₽</p>
-                    </div>
-                </div>
-                <div className={style.tovar}>
-                    <div className={style.img_tovar}>
-                        <img src={tovar} alt="" />
-                    </div>
-                    <div className={style.prices}>
-                        <p className={style.price_old}>от 599 ₽</p>
-                        <p className={style.price}>от 599 ₽</p>
-                    </div>
-                </div>
-                <div className={style.tovar}>
-                    <div className={style.img_tovar}>
-                        <img src={tovar} alt="" />
-                    </div>
-                    <div className={style.prices}>
-                        <p className={style.price_old}>от 599 ₽</p>
-                        <p className={style.price}>от 599 ₽</p>
-                    </div>
-                </div>
-
-                <div className={style.tovar}>
-                    <div className={style.img_tovar}>
-                        <img src={tovar} alt="" />
-                    </div>
-                    <div className={style.prices}>
-                        <p className={style.price_old}>от 599 ₽</p>
-                        <p className={style.price}>от 599 ₽</p>
-                    </div>
-                </div>
+                {
+                    dataSale.map((item) => {
+                        return (
+                            <div className={style.tovar}>
+                            <div className={style.img_tovar}>
+                                <img src={item.img} alt="" />
+                            </div>
+                            <div className={style.prices}>
+                                <p className={style.price_old}>от {item.price} ₽</p>
+                                <p className={style.price}>от {item.sale} ₽</p>
+                            </div>
+                        </div>
+                        )
+                    })
+                }
             </div>
         </div>
     )
