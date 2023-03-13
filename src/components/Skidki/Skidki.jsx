@@ -2,6 +2,7 @@ import style from "../Catalog/catalog.module.css"
 import tovar from "../../assets/img/tovar.png"
 import { tovars } from "../Catalog/Catalog"
 import { useState } from "react"
+import { format } from "../basket/basket"
 
 const Skidki = () => {
     const [data, setData] = useState(tovars)
@@ -10,7 +11,7 @@ const Skidki = () => {
 
 
     return (
-        <div className={style.catalog}>
+        <div className={style.catalog} id={"#skidki"}>
             <div className={style.header_catalog}>
                 <h1 className={style.h1_catalog}>
                     Скидки
@@ -20,13 +21,13 @@ const Skidki = () => {
                 {
                     dataSale.map((item) => {
                         return (
-                            <div className={style.tovar}>
+                            <div className={style.tovar} key={item.id}>
                             <div className={style.img_tovar}>
                                 <img src={item.img} alt="" />
                             </div>
                             <div className={style.prices}>
-                                <p className={style.price_old}>от {item.price} ₽</p>
-                                <p className={style.price}>от {item.sale} ₽</p>
+                                <p className={style.price_old}>от {format(item.price)} ₽</p>
+                                <p className={style.price}>от {format(item.sale)} ₽</p>
                             </div>
                         </div>
                         )

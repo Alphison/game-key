@@ -10,17 +10,19 @@ import { useState } from 'react';
 
 function App() {
   const [activeModal, setActive] = useState(false)
+  const [basket, setBasket] = useState([])
 
   return (
       <BrowserRouter>
         <div className="App">
-          <Basket activeModal={activeModal} setActive={setActive}/>
+          <Basket activeModal={activeModal} setActive={setActive} basket={basket} setBasket={setBasket}/>
           <Header setActive={setActive} />
           <div className="content">
             <Routes>
-                <Route path="/" element={<Home />}/>
+                <Route path="/" element={<Home />} setBasket={setBasket}/>
                 <Route path="/user" element={<User />}/>
-                <Route path="/tovar/:id" element={<Tovar />}/>
+                <Route path="/tovar/:id" element={<Tovar setBasket={setBasket} basket={basket}/> }/>
+                <Route path="/user" element={<User />}/>
             </Routes>
           </div>
           <Footer />

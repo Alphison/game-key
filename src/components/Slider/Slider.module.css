@@ -86,6 +86,7 @@ letter-spacing: 0.1em;
 color: #FFFFFF;
 }
 .content_slider button{
+    cursor: pointer;
     border: none;
     margin-top: 42px;
     padding: 15px 62px;

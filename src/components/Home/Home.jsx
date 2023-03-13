@@ -5,6 +5,8 @@ import style from "../Slider/Slider.module.css"
 import Subscription from "../Subscription/Subscription";
 
 const Home = () => {
+
+
     return (
         <>
             <Slider>
@@ -33,7 +35,7 @@ const Home = () => {
                     <img src="https://cdn.igromania.ru/mnt/games/4/9/4/a/d/0/14727/73f7677257f9bfa6_1920xH.jpg" alt="" />
                 </div>
             </Slider>
-            <Catalog />
+            <Catalog/>
             <Skidki />
             <Subscription />
         </>

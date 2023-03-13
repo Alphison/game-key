@@ -14,8 +14,8 @@ const Header = ({setActive}) => {
             </NavLink>
             <nav>
                 <NavLink className={style.navlink} to={"/"}>главная</NavLink>
-                <NavLink className={style.navlink} to={"#"}>каталог</NavLink>
-                <NavLink className={style.navlink} to={"#"}>скидки</NavLink>
+                <NavLink className={style.navlink} to={"#catalog"}>каталог</NavLink>
+                <NavLink className={style.navlink} to={"#skidki"}>скидки</NavLink>
             </nav>
             <div className={style.btns_header}>
                 <div className={style.ikon} onClick={() => setActive(true)}>

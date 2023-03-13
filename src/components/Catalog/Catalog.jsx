@@ -2,6 +2,7 @@ import style from "./catalog.module.css"
 import search from "../../assets/img/search.png"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { format } from "../basket/basket"
 
 export const tovars = [
     {
@@ -51,7 +52,7 @@ const Catalog = () => {
     }
 
     return (
-        <div className={style.catalog}>
+        <div className={style.catalog} id={'#catalog'}>
             <div className={style.header_catalog}>
                 <h1 className={style.h1_catalog}>
                     Каталог
@@ -73,7 +74,7 @@ const Catalog = () => {
                                         <img src={item.img} alt="" />
                                     </div>
                                 </Link>
-                                <p className={style.price}>от {item.price} ₽</p>
+                                <p className={style.price}>от {format(item.price)} ₽</p>
                             </div>
                         )
                     })

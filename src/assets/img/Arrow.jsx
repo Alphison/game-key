@@ -1,4 +1,4 @@
-import "./arrow.module.css"
+import "./Arrow.module.css"
 
 
 const Arrow = () => {
