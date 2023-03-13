@@ -34,11 +34,12 @@
 
 
     color: #000000;
-
 }
 .basket_tovars{
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    height: 700px;
     gap: 30px;
     margin-top: 19px;
 }

@@ -2,6 +2,7 @@ import style from "./tovar.module.css"
 
 import { tovars } from "../Catalog/Catalog"
 import { useParams } from "react-router"
+import { format } from "../basket/basket"
 
 const Tovar = ({setBasket, basket}) => {
 
@@ -9,7 +10,7 @@ const Tovar = ({setBasket, basket}) => {
     const id = params.id
     
 
-    const tovar = tovars.filter((item) => item.id == id)
+    const tovar = tovars.find((item) => item.id == id)
 
     const handleSetBasket = ({id, name, img, text, price}) => {
         setBasket(prev => [...prev, {id: id, name:name, img:img, text:text, price:price}])
@@ -21,12 +22,12 @@ const Tovar = ({setBasket, basket}) => {
     return (
         <div className={style.tovar}>
             <div className={style.img_tovar_one}>
-                <img src={tovar[0].img} alt="" />
+                <img src={tovar.img} alt="" />
             </div>
             <div className={style.content_tovar}>
-                <h1>{tovar[0].name}</h1>
-                <p>{tovar[0].text}</p>
-                <h2>от {tovar[0].price} ₽</h2>
+                <h1>{tovar.name}</h1>
+                <p>{tovar.text}</p>
+                <h2>от {format(tovar.price)} ₽</h2>
                 {
                      idBasket ? <p>товар в корзине</p> : (
                         <button onClick={() => handleSetBasket({...tovar[0]})}>ДОБАВИТЬ В КОРЗИНУ</button>
