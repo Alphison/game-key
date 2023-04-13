@@ -30,7 +30,7 @@ const Tovar = ({setBasket, basket}) => {
                 <h2>от {format(tovar.price)} ₽</h2>
                 {
                      idBasket ? <p>товар в корзине</p> : (
-                        <button onClick={() => handleSetBasket({...tovar[0]})}>ДОБАВИТЬ В КОРЗИНУ</button>
+                        <button onClick={() => handleSetBasket({...tovar})}>ДОБАВИТЬ В КОРЗИНУ</button>
                      )
                 }
             </div>

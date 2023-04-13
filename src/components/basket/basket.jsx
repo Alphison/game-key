@@ -7,6 +7,7 @@ const Basket = ({ activeModal, setActive, basket, setBasket }) => {
 
     const sumMoney = () => {
         const totalChild = basket.reduce((accum,item) => accum + item.price, 0)
+        console.log(totalChild)
 
         return format(totalChild)
     }

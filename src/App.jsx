@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
-import User from './components/User/User';
 import Tovar from './components/tovar/Tovar';
 import Footer from './components/Footer/Footer';
 import Basket from './components/basket/basket';
@@ -20,9 +19,7 @@ function App() {
           <div className="content">
             <Routes>
                 <Route path="/" element={<Home />} setBasket={setBasket}/>
-                <Route path="/user" element={<User />}/>
                 <Route path="/tovar/:id" element={<Tovar setBasket={setBasket} basket={basket}/> }/>
-                <Route path="/user" element={<User />}/>
             </Routes>
           </div>
           <Footer />

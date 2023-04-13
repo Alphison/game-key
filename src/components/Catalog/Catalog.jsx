@@ -11,7 +11,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
         price: 123123,
-        sale: 0
+        sale: 0,
+        category: 3
     },
     {
         id: 2,
@@ -19,7 +20,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
         price: 765567,
-        sale: 0
+        sale: 0,
+        category: 2
     },
     {
         id: 3,
@@ -27,7 +29,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
         price: 567567,
-        sale: 50
+        sale: 50,
+        category: 2
     },
     {
         id: 4,
@@ -35,7 +38,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
         price: 787878,
-        sale: 50
+        sale: 50,
+        category: 1
     },
     {
         id: 5,
@@ -43,7 +47,9 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://webmg.ru/wp-content/uploads/2022/06/i-80-1.jpeg',
         price: 123123,
-        sale: 0
+        sale: 0,
+        category: 1
+
     },
     {
         id: 6,
@@ -51,7 +57,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://pic.rutubelist.ru/video/52/1d/521da12f59fc15dbdc7949f3aea68f5e.jpg',
         price: 765567,
-        sale: 0
+        sale: 0,
+        category: 3
     },
     {
         id: 7,
@@ -59,7 +66,8 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://cdn.ananasposter.ru/image/cache/catalog/poster/games/83/10708-1000x830.jpg',
         price: 567567,
-        sale: 50
+        sale: 50,
+        category: 2
     },
     {
         id: 8,
@@ -67,17 +75,36 @@ export const tovars = [
         text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
         img: 'https://i.pinimg.com/originals/4d/4d/47/4d4d473a01857cc346f747a158b851a2.jpg',
         price: 787878,
-        sale: 50
+        sale: 50,
+        category: 1
+    }
+]
+
+const categories = [
+    {
+        id: 1,
+        name: 'category1'
+    },
+    {
+        id: 2,
+        name: 'category2'
+    },
+    {
+        id: 3,
+        name: 'category3'
     }
 ]
 
 const Catalog = () => {
     const [data, setData] = useState(tovars)
     const [searchData, setSearch] = useState('')
+    const [cat, setCat] = useState(1)
 
-    const unDataSale = data.filter((item) => item.sale === 0) 
+    const unDataSale = data.filter((item) => item.sale === 0)
 
-    const searchDataMassive = unDataSale.filter((item) => item.name.toLowerCase().includes(searchData))  
+    const categoryData = unDataSale?.filter((item) => item.category === cat)
+
+    const searchDataMassive = categoryData?.filter((item) => item.name.toLowerCase().includes(searchData))  
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value)
@@ -96,9 +123,16 @@ const Catalog = () => {
                     </div>
                 </div>
             </div>
+            <select name="" id="" onChange={(e) => setCat(parseInt(e.target.value, 10))}>
+                {
+                    categories.map((category) => {
+                        return <option value={category.id}>{category.name}</option>
+                    })
+                }
+            </select>
             <div className={style.catalog_wrapper}>
                 {
-                    searchDataMassive.map(item => {
+                    searchDataMassive?.map(item => {
                         return (
                             <div className={style.tovar} key={item.id}>
                                 <Link to={`/tovar/${item.id}`}>
@@ -107,6 +141,7 @@ const Catalog = () => {
                                     </div>
                                 </Link>
                                 <p className={style.price}>от {format(item.price)} ₽</p>
+                                <p>{item.title}</p>
                             </div>
                         )
                     })
