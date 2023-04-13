@@ -3,29 +3,27 @@ import style from "./tovar.module.css"
 import { tovars } from "../Catalog/Catalog"
 import { useParams } from "react-router"
 import { format } from "../basket/basket"
-// import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Tovar = ({setBasket, basket}) => {
-    // const [tovar, setServicesTovar] = useState([])
+    const [tovar, setServicesTovar] = useState([])
 
     const params = useParams()
     const id = params.id
-    
-    const tovar = tovars.find((item) => item.id == id) // удалить строку
 
-    // const fetchServices = async () => {
-    //     const response = await fetch(`такая же ссылка как и в catalog/${id}`)
-    //     const data = await response.json()
+    const fetchServices = async () => {
+        const response = await fetch(`https://exam.avavion.ru/api/services/${id}`)
+        const data = await response.json()
 
-    //     setServicesTovar(data.data)
-    // }
+        setServicesTovar(data.data)
+    }
 
-    // useEffect(() => {
-    //     fetchServices()
-    // }, [])
+    useEffect(() => {
+        fetchServices()
+    }, [])
 
-    const handleSetBasket = ({id, name, img, text, price}) => {
-        setBasket(prev => [...prev, {id: id, name:name, img:img, text:text, price:price}])
+    const handleSetBasket = ({id, name, image_url, text, price}) => {
+        setBasket(prev => [...prev, {id: id, name:name, image_url:image_url, text:text, price: tovar.dicsount_percent === 0 ? price : price * (tovar.dicsount_percent/100)}])
     }
 
     const idBasket = basket.find(item => item.id == id)
@@ -34,12 +32,18 @@ const Tovar = ({setBasket, basket}) => {
     return (
         <div className={style.tovar}>
             <div className={style.img_tovar_one}>
-                <img src={tovar.img} alt="" />
+                <img src={tovar.image_url} alt="" />
             </div>
             <div className={style.content_tovar}>
                 <h1>{tovar.name}</h1>
                 <p>{tovar.text}</p>
-                <h2>от {format(tovar.price)} ₽</h2>
+                <h2>от 
+                     {
+                        tovar.dicsount_percent === 0 ?  format(tovar.price) :
+                        format(tovar.price * (tovar.dicsount_percent/100))
+                     } 
+                     ₽
+                </h2>
                 {
                      idBasket ? <p>товар в корзине</p> : (
                         <button onClick={() => handleSetBasket({...tovar})}>ДОБАВИТЬ В КОРЗИНУ</button>

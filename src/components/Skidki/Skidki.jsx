@@ -1,14 +1,25 @@
 import style from "../Catalog/catalog.module.css";
 import tovar from "../../assets/img/tovar.png";
 import { tovars } from "../Catalog/Catalog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "../basket/basket";
 import { NavLink } from "react-router-dom";
 
 const Skidki = () => {
-  const [data, setData] = useState(tovars);
+  const [data, setData] = useState();
 
-  const dataSale = data.filter((item) => item.sale > 0);
+  const dataSale = data?.filter((item) => item.dicsount_percent > 0);
+
+  const fetchServices = async () => {
+    const response = await fetch(`https://exam.avavion.ru/api/services`)
+    const data = await response.json()
+
+    setData(data.data)
+}
+
+useEffect(() => {
+    fetchServices()
+}, [])
 
 
 
@@ -18,18 +29,18 @@ const Skidki = () => {
         <h1 className={style.h1_catalog}>Скидки</h1>
       </div>
       <div className={style.catalog_wrapper}>
-        {dataSale.map((item) => {
+        {dataSale?.map((item) => {
           return (
             <div className={style.tovar} key={item.id}>
               <NavLink to={`/tovar/${item.id}`}>
                 <div className={style.img_tovar}>
-                    <img src={item.img} alt="" />
+                    <img src={item.image_url} alt="" />
                 </div>
               </NavLink>
               <div className={style.prices}>
                 <p className={style.price_old}>от {format(item.price)} ₽</p>
                 <p className={style.price}>от {
-                format(item.price * (item.sale/100))
+                format(item.price * (item.dicsount_percent/100))
                 } ₽</p>
               </div>
             </div>

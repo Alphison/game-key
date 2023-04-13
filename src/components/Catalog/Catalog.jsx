@@ -1,121 +1,40 @@
 import style from "./catalog.module.css"
 import search from "../../assets/img/search.png"
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { format } from "../basket/basket"
 
-export const tovars = [
-    {
-        id: 1,
-        name: 'asdadsdsa',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
-        price: 123123,
-        sale: 0,
-        category: 3
-    },
-    {
-        id: 2,
-        name: 'asdadhfdhgfdghfghsdsa',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
-        price: 765567,
-        sale: 0,
-        category: 2
-    },
-    {
-        id: 3,
-        name: 'asdadsdsa',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
-        price: 567567,
-        sale: 50,
-        category: 2
-    },
-    {
-        id: 4,
-        name: 'aaaaaaaaaa',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://3dnews.ru/assets/external/illustrations/2022/11/12/1077269/Atomic-Heart.jpg',
-        price: 787878,
-        sale: 50,
-        category: 1
-    },
-    {
-        id: 5,
-        name: 'game1',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://webmg.ru/wp-content/uploads/2022/06/i-80-1.jpeg',
-        price: 123123,
-        sale: 0,
-        category: 1
-
-    },
-    {
-        id: 6,
-        name: 'game2',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://pic.rutubelist.ru/video/52/1d/521da12f59fc15dbdc7949f3aea68f5e.jpg',
-        price: 765567,
-        sale: 0,
-        category: 3
-    },
-    {
-        id: 7,
-        name: 'game3',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://cdn.ananasposter.ru/image/cache/catalog/poster/games/83/10708-1000x830.jpg',
-        price: 567567,
-        sale: 50,
-        category: 2
-    },
-    {
-        id: 8,
-        name: 'aaaaaaaaaa',
-        text: 'dsakfjabnshjkfhsakdfashdfsajkdfsajkfdjsadgfahjsdfalsdgflkasgdkdfokiawsguefoakie',
-        img: 'https://i.pinimg.com/originals/4d/4d/47/4d4d473a01857cc346f747a158b851a2.jpg',
-        price: 787878,
-        sale: 50,
-        category: 1
-    }
-]
-
-const categories = [
-    {
-        id: 1,
-        name: 'category1'
-    },
-    {
-        id: 2,
-        name: 'category2'
-    },
-    {
-        id: 3,
-        name: 'category3'
-    }
-]
-
 const Catalog = () => {
-    const [data, setData] = useState(tovars)  // tovars удалить
+    const [data, setData] = useState()
     const [searchData, setSearch] = useState('')
     const [cat, setCat] = useState(1)
 
-    const unDataSale = data.filter((item) => item.sale === 0)
+    // const [categories, setCategories] = useState()
 
-    // const fetchServices = async () => {
-    //     const response = await fetch(`cсылка для всех объектов товаров`)
+    const unDataSale = data?.filter((item) => item.dicsount_percent === 0)
+
+    const fetchServices = async () => {
+        const response = await fetch(`https://exam.avavion.ru/api/services`)
+        const data = await response.json()
+
+        setData(data.data)
+    }
+
+    // const fetchServicesCategories = async () => {
+    //     const response = await fetch(`ссылка для вывода всех категорий`)
     //     const data = await response.json()
 
-    //     setData(data.data)
+    //     setCategories(data.data)
     // }
 
-    // useEffect(() => {
-    //     fetchServices()
-    // }, [])
+    useEffect(() => {
+        fetchServices()
+        // fetchServicesCategories()
+    }, [])
 
-    const categoryData = unDataSale?.filter((item) => item.category === cat)
+    // const categoryData = unDataSale?.filter((item) => item.category === cat)
 
-    const searchDataMassive = categoryData?.filter((item) => item.name.toLowerCase().includes(searchData))  
+    const searchDataMassive = unDataSale?.filter((item) => item.name.includes(searchData))  
 
     const handleChangeSearch = (e) => {
         setSearch(e.target.value)
@@ -134,13 +53,13 @@ const Catalog = () => {
                     </div>
                 </div>
             </div>
-            <select name="" id="" onChange={(e) => setCat(parseInt(e.target.value, 10))}>
+            {/* <select name="" id="" onChange={(e) => setCat(parseInt(e.target.value, 10))}>
                 {
                     categories.map((category) => {
                         return <option value={category.id}>{category.name}</option>
                     })
                 }
-            </select>
+            </select> */}
             <div className={style.catalog_wrapper}>
                 {
                     searchDataMassive?.map(item => {
@@ -148,7 +67,7 @@ const Catalog = () => {
                             <div className={style.tovar} key={item.id}>
                                 <Link to={`/tovar/${item.id}`}>
                                     <div className={style.img_tovar}>
-                                        <img src={item.img} alt="" />
+                                        <img src={item.image_url} alt="" />
                                     </div>
                                 </Link>
                                 <p className={style.price}>от {format(item.price)} ₽</p>

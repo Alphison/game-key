@@ -7,7 +7,6 @@ const Basket = ({ activeModal, setActive, basket, setBasket }) => {
 
     const sumMoney = () => {
         const totalChild = basket.reduce((accum,item) => accum + item.price, 0)
-        console.log(totalChild)
 
         return format(totalChild)
     }
@@ -35,7 +34,7 @@ const Basket = ({ activeModal, setActive, basket, setBasket }) => {
             return (
               <div className={style.basket_tovar} key={item.id}>
                 <div className={style.img_tovar_basket}>
-                  <img src={item.img} alt="" />
+                  <img src={item.image_url} alt="" />
                 </div>
                 <div className={style.content_basket_tovar}>
                   <p>{item.name}</p>
