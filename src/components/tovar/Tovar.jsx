@@ -3,14 +3,26 @@ import style from "./tovar.module.css"
 import { tovars } from "../Catalog/Catalog"
 import { useParams } from "react-router"
 import { format } from "../basket/basket"
+// import { useState } from "react"
 
 const Tovar = ({setBasket, basket}) => {
+    // const [tovar, setServicesTovar] = useState([])
 
     const params = useParams()
     const id = params.id
     
+    const tovar = tovars.find((item) => item.id == id) // удалить строку
 
-    const tovar = tovars.find((item) => item.id == id)
+    // const fetchServices = async () => {
+    //     const response = await fetch(`такая же ссылка как и в catalog/${id}`)
+    //     const data = await response.json()
+
+    //     setServicesTovar(data.data)
+    // }
+
+    // useEffect(() => {
+    //     fetchServices()
+    // }, [])
 
     const handleSetBasket = ({id, name, img, text, price}) => {
         setBasket(prev => [...prev, {id: id, name:name, img:img, text:text, price:price}])

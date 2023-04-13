@@ -96,11 +96,22 @@ const categories = [
 ]
 
 const Catalog = () => {
-    const [data, setData] = useState(tovars)
+    const [data, setData] = useState(tovars)  // tovars удалить
     const [searchData, setSearch] = useState('')
     const [cat, setCat] = useState(1)
 
     const unDataSale = data.filter((item) => item.sale === 0)
+
+    // const fetchServices = async () => {
+    //     const response = await fetch(`cсылка для всех объектов товаров`)
+    //     const data = await response.json()
+
+    //     setData(data.data)
+    // }
+
+    // useEffect(() => {
+    //     fetchServices()
+    // }, [])
 
     const categoryData = unDataSale?.filter((item) => item.category === cat)
 
